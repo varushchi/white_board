@@ -1,23 +1,30 @@
-import logo from './logo.svg';
-import './App.css';
+import './App.css'
+import Player from './Player';
 
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <div className="play-border">
+        <Player
+          width = '100'
+          height = 'auto'
+          viewBox = '0 0 24 1000'
+          color = 'red'
+          x = '10'
+          y = '100'
+          radius = '20'
+        />
+
+        <Player
+          width = '100'
+          height = 'auto'
+          viewBox = '0 0 24 1000'
+          color = 'green'
+          x = '10'
+          y = '100'
+          radius = '20'
+        />
+      </div>
     </div>
   );
 }
