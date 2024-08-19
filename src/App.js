@@ -1,5 +1,6 @@
 import './App.css'
 import Player from './Player';
+import Slider from './Slider';
 
 function App() {
 
@@ -17,7 +18,10 @@ function App() {
           startPoint = {500}
         />
       </div>
+      <Slider/>
     </div>
+
+    
   );
 }
 
