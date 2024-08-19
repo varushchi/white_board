@@ -2,31 +2,12 @@
 {
   width: 800px;
   height: 800px;
-  border: 2px black solid;
+  border: 2px white solid;
   margin-top: 50px;
   margin-left: 500px;
   position: absolute;
 }
-
-.player-1,
-.player-2
+body
 {
-  width: 100px;
-  height: 100px;
-  border: 2px black solid;
-  border-radius: 50px;
-  position: relative;
-  display: inline-block;
-}
-
-.player-1
-{
-  background-color: red;
-  left: 20px;
-}
-
-.player-2
-{
-  left: 580px;
-  background-color: green;
+  background-color: black;
 }

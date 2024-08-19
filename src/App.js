@@ -1,16 +1,21 @@
 import './App.css'
-//import Player from './Player';
-import MovePlayer from './MovePlayer';
+import Player from './Player';
 
 function App() {
 
-  const top1 = MovePlayer(0)
-  const top2 = MovePlayer(500)
   return (
     <div className="App">
       <div className="play-border">
-        <div className='player-1' style={{top: top1}}></div>
-        <div className='player-2' style={{top: top2}}></div>
+        <Player 
+          color = 'red'
+          positionLeft = '20px'
+          startPoint = {0}
+        />
+        <Player
+          color = 'green'
+          positionLeft = '580px'
+          startPoint = {500}
+        />
       </div>
     </div>
   );
