@@ -14,22 +14,21 @@ function App() {
           positionLeft = '20px'
           startPoint = {0}
           slider = {slider1}
-        />
+          movingLeft = {true}/>
+          
         <Player
           color = 'green'
           positionLeft = '580px'
           startPoint = {500}
           slider = {slider2}
-        />
+          movingLeft = {false}/>
+          
       </div>
       <div className='speed-sliders-div'>
         <Slider handleChange={(e) => setSlider1(e.target.value)}/>
         <Slider handleChange={(e) => setSlider2(e.target.value)}/>
       </div>
-      
     </div>
-
-    
   );
 }
 

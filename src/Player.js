@@ -1,5 +1,6 @@
 import React from "react";
 import './Player.css'
+import Spell from "./Spell";
 
 function Player(props) {
   const [top, setTop] = React.useState(props.startPoint)
@@ -34,8 +35,11 @@ function Player(props) {
     },props.slider)
   })
 
+
   return(
-    <div className="player" style={{backgroundColor: props.color, left: props.positionLeft, top: top}} onMouseEnter={() => setMouseEnter(true)}></div>
+    <div className="player" style={{backgroundColor: props.color, left: props.positionLeft, top: top}} onMouseEnter={() => setMouseEnter(true)}>
+      <Spell movingLeft = {props.movingLeft} color = {props.color}/>
+    </div>
   )
 }
 
