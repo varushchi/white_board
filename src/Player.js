@@ -1,8 +1,9 @@
 import React from "react";
 import './Player.css'
+import { useSelector } from "react-redux";
 
 function Player(props) {
-
+  const slider = useSelector((state) => state.slider.value)
   const [top, setTop] = React.useState(props.startPoint)
   const collision = 700
   const [movingDown, setMovingDown] = React.useState(true)
@@ -32,7 +33,7 @@ function Player(props) {
   React.useEffect(()=>{
     setTimeout(()=>{
       MoveVertical()
-    },1)
+    },slider)
   })
 
   return(
