@@ -5,7 +5,7 @@ import { useSelector } from "react-redux";
 function Spell(props)
 {
   const movingLeft = props.movingLeft
-  const defaultLeft = movingLeft ? 0 : 70
+  const defaultLeft = movingLeft ? 70 : 0
   let collision
   const [left, setLeft] = React.useState(defaultLeft)
   const [parentTop, setParentTop] = React.useState()
@@ -36,7 +36,7 @@ function Spell(props)
 
     if (alive)
     {
-      setParentTop(40 +   topOnSpell - props.parentTop)
+      setParentTop(topOnSpell - props.parentTop)
 
       if (movingLeft){
         collision = 750
@@ -62,10 +62,8 @@ function Spell(props)
   }
 
   React.useEffect(()=>{
-    setTimeout(()=>{
       MoveHorizontal()
-    },5)
-  })
+  },[redPosition, greenPosition])
 
   React.useEffect(()=>{
     setTopOnSpell(props.parentTop)
