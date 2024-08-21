@@ -1,31 +1,65 @@
 import React from "react";
 import './Spell.css'
+import { useSelector } from "react-redux";
 
 function Spell(props)
 {
-  const [movingLeft, setMovingLeft] = React.useState(props.movingLeft)
-  const [left, setLeft] = React.useState(movingLeft ? 0 : 70)
+  const movingLeft = props.movingLeft
   const defaultLeft = movingLeft ? 0 : 70
   let collision
+  const [left, setLeft] = React.useState(defaultLeft)
+  const [parentTop, setParentTop] = React.useState()
+  const [topOnSpell, setTopOnSpell] = React.useState() 
+  const [alive, setAlive] = React.useState(true)
+  const [redScore, setRedScore] = React.useState(0)
+  const [redScored, setRedScored] = React.useState(false)
+  const [greenScore, setGreenScore] = React.useState(0)
+
+  const redPosition = useSelector((state) => state.redPosition).value
+  const greenPosition = useSelector((state) => state.greenPosition).value
+
+  const greenBall = {
+    top: greenPosition,
+    buttom: greenPosition + 100,
+    left: 630,
+    right: 730 
+  }
+
   function MoveHorizontal()
   {
-    if (movingLeft){
-      collision = 750
-      setLeft(prev => prev + 1)
+    function backToDefault()
+    {
+      setLeft(defaultLeft)
+      setParentTop(40)
+      setAlive(false)
+    }
 
-      if (left >= collision){
-        setLeft(defaultLeft)
+    if (alive)
+    {
+      setParentTop(40 +   topOnSpell - props.parentTop)
+
+      if (movingLeft){
+        collision = 750
+        setLeft(prev => prev + 1)
+        if (left >= collision){
+          backToDefault()
+        }
+        if (left <= greenBall.right && left >= greenBall.left && topOnSpell <= greenBall.buttom && topOnSpell >= greenBall.top){
+          backToDefault()
+          setRedScored(true)
+        }
+
+      }
+      else{
+        collision = -700
+        setLeft(prev => prev - 1)
+        
+        if (left<=collision){
+          backToDefault()
+        }
       }
     }
-    else{
-      collision = -700
-      setLeft(prev => prev - 1)
-      
-      if (left<=collision)
-
-      setLeft(defaultLeft)
-    }
-  } 
+  }
 
   React.useEffect(()=>{
     setTimeout(()=>{
@@ -33,9 +67,25 @@ function Spell(props)
     },5)
   })
 
+  React.useEffect(()=>{
+    setTopOnSpell(props.parentTop)
+    if (!alive){
+      if (redScored)
+      {
+        setRedScored(false)
+        setRedScore(prev => prev + 1)
+        props.score(redScore)
+        
+      }
+      setTimeout(()=>{
+        setAlive(true)
+      },1000)
+    }
+  },[alive])
+
   
   return(
-    <div className="spell" style={{left: left, backgroundColor: props.color}}></div>
+    <div className="spell" style={{left: left, backgroundColor: props.color, top: parentTop}}></div>
   )
 }
 

@@ -11,14 +11,14 @@ function App() {
       <div className="play-border">
         <Player 
           color = 'red'
-          positionLeft = '20px'
+          positionLeft = {20}
           startPoint = {0}
           slider = {slider1}
           movingLeft = {true}/>
           
         <Player
           color = 'green'
-          positionLeft = '580px'
+          positionLeft = {580}
           startPoint = {500}
           slider = {slider2}
           movingLeft = {false}/>
