@@ -14,6 +14,7 @@ function Spell(props)
   const [redScore, setRedScore] = React.useState(0)
   const [redScored, setRedScored] = React.useState(false)
   const [greenScore, setGreenScore] = React.useState(0)
+  const [greenScored, setGreenScored] = React.useState(false)
 
   const redPosition = useSelector((state) => state.redPosition).value
   const greenPosition = useSelector((state) => state.greenPosition).value
@@ -21,8 +22,15 @@ function Spell(props)
   const greenBall = {
     top: greenPosition,
     buttom: greenPosition + 100,
-    left: 630,
-    right: 730 
+    left: 640,
+    right: 740 
+  }
+
+  const redBall = {
+    top: redPosition,
+    buttom: redPosition + 100,
+    left: -670,
+    right: -570
   }
 
   function MoveHorizontal()
@@ -36,7 +44,7 @@ function Spell(props)
 
     if (alive)
     {
-      setParentTop(topOnSpell - props.parentTop)
+      setParentTop(-10 + topOnSpell - props.parentTop)
 
       if (movingLeft){
         collision = 750
@@ -57,6 +65,11 @@ function Spell(props)
         if (left<=collision){
           backToDefault()
         }
+
+        if (left <= redBall.right && left >= redBall.left && topOnSpell <= redBall.buttom && topOnSpell >= redBall.top){
+          backToDefault()
+          setGreenScored(true)
+        }
       }
     }
   }
@@ -73,17 +86,24 @@ function Spell(props)
         setRedScored(false)
         setRedScore(prev => prev + 1)
         props.score(redScore)
-        
       }
+
+      if (greenScored)
+      {
+        setGreenScored(false)
+        setGreenScore(prev => prev + 1)
+        props.score(greenScore)
+      }
+
       setTimeout(()=>{
         setAlive(true)
-      },1000)
+      },props.spellSlider)
     }
   },[alive])
 
   
   return(
-    <div className="spell" style={{left: left, backgroundColor: props.color, top: parentTop}}></div>
+    <div className="spell" style={{left: left, backgroundColor: `rgb(${props.color.r}, ${props.color.g}, ${props.color.b})`, top: parentTop}}></div>
   )
 }
 

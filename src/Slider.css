@@ -1,21 +1,6 @@
-.slide-line
+label
 {
-  position: absolute;
-  width: 200px;
-  height: 20px;
-  background-color: blue;
-  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
 }
 
-.slide-ball
-{
-  position: relative;
-  width: 20px;
-  height: 20px;
-  border-radius: 10px;
-  background-color: yellow;
-  top: 0px;
-  left: 0px;
-
-
-}

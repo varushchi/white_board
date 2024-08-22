@@ -10,8 +10,6 @@ function Player(props) {
   const collision = 700
   const [movingDown, setMovingDown] = React.useState(true)
   const [mouseEnter, setMouseEnter] = React.useState(false)
-  const [redScore, setRedScore] = React.useState(0)
-  const [greenScore, setGreenScore] = React.useState(0)
   const dispatch = useDispatch()
   
   const MoveVertical = () => {
@@ -32,7 +30,7 @@ function Player(props) {
     }
 
     if (mouseEnter){
-      movingDown ? setTop(prev => prev - 10) : setTop(prev=>prev + 10)
+      movingDown ? setTop(prev => prev - 6) : setTop(prev=>prev + 6)
       setMovingDown(prev => !prev)
       setMouseEnter(false)
     }
@@ -44,16 +42,19 @@ function Player(props) {
     },props.slider)
   })
 
-  function handleScore(score)
-  {
-    props.color === 'red' ? setRedScore(score) : setGreenScore(score)
-  }
-
-
   return(
-    <div className="player" style={{backgroundColor: props.color, left: props.positionLeft, top: top}} onMouseEnter={() => setMouseEnter(true)}>
-      <Spell movingLeft = {props.movingLeft} color = {props.color} parentTop = {top} score = {handleScore}/>
-      <p className="score">{props.color === 'red' ? redScore : greenScore}</p>
+    <div 
+      className="player" 
+      style={{backgroundColor: props.color, left: props.positionLeft, top: top}} 
+      onMouseOverCapture={() => setMouseEnter(true)} 
+      onClick={ props.handleClick }>
+
+      <Spell 
+        movingLeft = {props.movingLeft} 
+        color = {props.spellColor} 
+        parentTop = {top} 
+        score = {props.handleScore} 
+        spellSlider = {props.color === 'red' ? props.sliderSpell1 : props.sliderSpell2}/>
     </div>
   )
 }
