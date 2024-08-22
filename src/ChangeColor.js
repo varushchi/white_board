@@ -27,7 +27,7 @@ export default function ChangeColor(props) {
             b: e.target.value})}/>
         </li>
         <li>
-          <button onClick={props.handleChange(rgb)}>Change</button>
+          <button onClick={()=>props.handleChange(rgb)}>Change</button>
         </li>
         <li>
           <button onClick={props.handleClick}>Close</button>
